@@ -1,0 +1,30 @@
+2024-07-21 18:34:52 jdbc[23]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "INFODESTACADOS" no encontrada
+Table "INFODESTACADOS" not found; SQL statement:
+INSERT INTO InfoDestacados(id, type_destacado, url, img_url)
+VALUES (1, 'movie', 'https://www.imdb.com/title/tt10199466/', 'https://m.media-amazon.com/images/M/MV5BN2Y1N2FiZWQtZmJhMi00Y2Q5LWJiMmItY2Q1ZWNjZjEzZDlhXkFtZTgwNTIwMDE1MDE@._V1.SX300.jpg') [42102-214]
+2024-07-21 18:34:52 jdbc[23]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "INFODESTACADOS" no encontrada
+Table "INFODESTACADOS" not found; SQL statement:
+INSERT INTO InfoDestacados(id, type_destacado, url, img_url)
+VALUES (2, 'movie', 'https://www.imdb.com/title/tt10873428/', 'https://m.media-amazon.com/images/I/612e3b762e4704013083121021788635_CR0,426,426_AL_.jpg') [42102-214]
+2024-07-21 18:34:52 jdbc[23]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "INFODESTACADOS" no encontrada
+Table "INFODESTACADOS" not found; SQL statement:
+INSERT INTO InfoDestacados(id, type_destacado, url, img_url)
+VALUES (3, 'movie', 'https://www.imdb.com/title/tt10202334/', 'https://m.media-amazon.com/images/I/81o7r52fHFL._CR0,426,426_AL_.jpg') [42102-214]
+2024-07-21 18:34:52 jdbc[23]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "INFODESTACADOS" no encontrada
+Table "INFODESTACADOS" not found; SQL statement:
+INSERT INTO InfoDestacados(id, type_destacado, url, img_url)
+VALUES (4, 'series', 'https://www.imdb.com/title/tt8211210/', 'https://m.media-amazon.com/images/M/MV5BMTcyNjE2OTk1MV5BMl5BanBnXkFtZTgwNDk2NzY3MjE@._V1_SX300.jpg') [42102-214]
+2024-07-21 18:34:52 jdbc[23]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "INFODESTACADOS" no encontrada
+Table "INFODESTACADOS" not found; SQL statement:
+INSERT INTO InfoDestacados(id, type_destacado, url, img_url)
+VALUES (5, 'series', 'https://www.imdb.com/title/tt10811392/', 'https://m.media-amazon.com/images/M/MV5BN2I5Y2Q2N2MtY2MzMC00YWI4LTg0M2UtYWE4Y2I3MzY1N2Y3XkEyXkFqcGdeQXVyMDM2NDM2MDc@._V1_SX300.jpg') [42102-214]
+2024-07-21 18:34:52 jdbc[23]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "INFODESTACADOS" no encontrada
+Table "INFODESTACADOS" not found; SQL statement:
+INSERT INTO InfoDestacados(id, type_destacado, url, img_url)
+VALUES (6, 'series', 'https://www.imdb.com/title/tt10831224/', 'https://m.media-amazon.com/images/M/MV5BY2U3Y2Q4YzUtMTg2NC00MTQ5LTkzNjUtMDk3YzQ4Y2MxY2U2XkEyXkFqcGdeQXVyMDM2NDM2MDc@._V1_SX300.jpg') [42102-214]
