@@ -5,10 +5,16 @@ import java.util.List;
 
 //import org.hibernate.mapping.List;
 
-//import com.netflux.spring.jpa.h2.model.PeliculasDestacadas;
-
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "peliculas")
 public class Pelicula {
@@ -48,7 +54,7 @@ public class Pelicula {
     private List<Infocast> infocasts;
 
     @OneToOne(mappedBy = "peliculas", cascade = CascadeType.ALL)
-    private PeliculasDestacadas peliculasDestacadas;
+    private PeliculaDestacada peliculasDestacadas;
 
     // @OneToOne
     // @JoinColumn(name = "fk_peliculas_id")
@@ -58,10 +64,6 @@ public class Pelicula {
     // @JoinColumn(name = "pelicula_id")
 
     // private List<InfoCast> cast;
-
-    public Pelicula() {
-
-    }
 
     public Pelicula(String url, String imgURL, String title, String description,
             Integer yearFilm, Integer duration, String director, List<Infocast> infocasts) {
@@ -78,6 +80,10 @@ public class Pelicula {
 
     public long getId() {
         return id;
+    }
+
+    public String getIdString() {
+        return Long.toString(id);
     }
 
     public String getUrl() {
@@ -120,6 +126,22 @@ public class Pelicula {
         this.yearFilm = yearFilm;
     }
 
+    public Integer getDuration() {
+        return duration;
+    }
+
+    public void setDuration(Integer duration) {
+        this.duration = duration;
+    }
+
+    public String getDirector() {
+        return director;
+    }
+
+    public void setDirector(String director) {
+        this.director = director;
+    }
+
     public List<Infocast> getInfocast() {
         return this.infocasts;
     }
@@ -127,11 +149,6 @@ public class Pelicula {
     public void setInfocast(List<Infocast> infocasts) {
         this.infocasts = infocasts;
     }
-
-    // public PeliculasDestacadas getPeliculasDestacadas() {
-    // PeliculasDestacadas peliD = new PeliculasDestacadas();
-    // return peliD/* this.peliculasDestacadas */;
-    // }
 
     @Override
     public String toString() {
@@ -147,14 +164,5 @@ public class Pelicula {
                 ", cast1=" + infocasts +
                 '}';
     }// este metodo no lo realiza muestro otro que no es este
-
-    // @Override
-    // public String toString() {
-
-    // return "Pelicula [id=" + id + ", url=" + url + ", description=" + description
-    // + ", year=" + yearFilm
-    // + ", duration=" + duration + ", director=" + director + "]";
-
-    // }
 
 }

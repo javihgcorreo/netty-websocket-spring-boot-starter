@@ -21,7 +21,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.netflux.spring.jpa.h2.model.Serie;
+import com.netflux.spring.jpa.h2.model.Serie;
 import com.netflux.spring.jpa.h2.repository.SerieRepository;
+import com.netflux.spring.jpa.h2.service.SerieService;
 
 @CrossOrigin(origins = "http://localhost:8081")
 @RestController
@@ -30,6 +32,10 @@ public class SerieController {
 
     @Autowired
     SerieRepository serieRepository;
+
+    @Autowired
+    SerieService serieService;
+
     String respuesta;
 
     // @GetMapping("/series/hola")
@@ -50,46 +56,64 @@ public class SerieController {
     // return serieRepository.findAll();
     // }
 
-    /*@GetMapping("/series")
+    /*
+     * @GetMapping("/series")
+     * public ResponseEntity<List<Serie>> getAllSeries() {
+     * //System.out.println("Paso por aqui");
+     * try {
+     * List<Serie> series = new ArrayList<Serie>();
+     * 
+     * //serieRepository.findAll().forEach(series::add);
+     * series = serieRepository.findAll();
+     * if (series.isEmpty()) {
+     * //System.out.println(series.toString());
+     * return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+     * }
+     * //System.out.println(series.toString());
+     * 
+     * return new ResponseEntity<>(series, HttpStatus.OK);
+     * } catch (Exception e) {
+     * return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+     * }
+     * }
+     */
+
+    @GetMapping("/series")
     public ResponseEntity<List<Serie>> getAllSeries() {
-        //System.out.println("Paso por aqui"); 
         try {
             List<Serie> series = new ArrayList<Serie>();
+            series = serieService.getAllSeries();
 
-            //serieRepository.findAll().forEach(series::add);
-            series = serieRepository.findAll();
             if (series.isEmpty()) {
-                //System.out.println(series.toString());
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
-            //System.out.println(series.toString()); 
 
             return new ResponseEntity<>(series, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-    }*/
-
-    @GetMapping("/series")
-    public ResponseEntity<List<Serie>> getAllSeries(@RequestParam(required
-    = false) String title) {
-        try {
-            List<Serie> series = new ArrayList<Serie>();
-
-            if (title == null)
-                serieRepository.findAll().forEach(series::add);
-            else
-            serieRepository.findByTitleContainingIgnoreCase(title).forEach(series::add);
-            //serieRepository.findAll().forEach(series::add);
-            if (series.isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-
-        return new ResponseEntity<>(series, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
     }
+
+    // @GetMapping("/series")
+    // public ResponseEntity<List<Serie>> getAllSeries(@RequestParam(required =
+    // false) String title) {
+    // try {
+    // List<Serie> series = new ArrayList<Serie>();
+
+    // if (title == null)
+    // serieRepository.findAll().forEach(series::add);
+    // else
+    // serieRepository.findByTitleContainingIgnoreCase(title).forEach(series::add);
+    // // serieRepository.findAll().forEach(series::add);
+    // if (series.isEmpty()) {
+    // return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    // }
+
+    // return new ResponseEntity<>(series, HttpStatus.OK);
+    // } catch (Exception e) {
+    // return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+    // }
+    // }
 
     @GetMapping("/series/novedades")
     public ResponseEntity<List<Serie>> getAllSeriesNew() {
@@ -102,7 +126,7 @@ public class SerieController {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
 
-        return new ResponseEntity<>(series, HttpStatus.OK);
+            return new ResponseEntity<>(series, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -114,14 +138,13 @@ public class SerieController {
             List<Serie> series = new ArrayList<Serie>();
 
             serieRepository.findById(Integer.parseInt(id)).forEach(series::add);
-            
+
             if (series.size() == 0) {
-                
+
                 throw new ResponseStatusException(HttpStatus.NOT_FOUND, "La serie no existe");
             }
-        
 
-        return new ResponseEntity<>(series, HttpStatus.OK);
+            return new ResponseEntity<>(series, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }

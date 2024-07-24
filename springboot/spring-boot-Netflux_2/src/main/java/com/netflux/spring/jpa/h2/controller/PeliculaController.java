@@ -23,6 +23,8 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.netflux.spring.jpa.h2.model.Pelicula;
 import com.netflux.spring.jpa.h2.repository.PeliculaRepository;
+import com.netflux.spring.jpa.h2.service.PeliculaService;
+import com.netflux.spring.jpa.h2.dto.InfoPelicula;
 
 @CrossOrigin(origins = "http://localhost:8081")
 @RestController
@@ -31,39 +33,36 @@ public class PeliculaController {
 
     @Autowired
     PeliculaRepository peliculaRepository;
+
+    @Autowired
+    PeliculaService peliculaService;
     String respuesta;
 
+    // @GetMapping("/peliculas")
+    // public ResponseEntity<List<Pelicula>> getAllPeliculas(@RequestParam(required
+    // = false) String title) {
+    // try {
+    // List<Pelicula> peliculas = new ArrayList<Pelicula>();
+
+    // if (title == null)
+    // peliculaRepository.findAll().forEach(peliculas::add);
+    // else
+    // peliculaRepository.findByTitleContainingIgnoreCase(title).forEach(peliculas::add);
+    // if (peliculas.isEmpty()) {
+    // return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    // }
+
+    // return new ResponseEntity<>(peliculas, HttpStatus.OK);
+    // } catch (Exception e) {
+    // return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+    // }
+    // }
+
     @GetMapping("/peliculas")
-    public ResponseEntity<List<Pelicula>> getAllPeliculas(@RequestParam(required = false) String title) {
+    public ResponseEntity<List<InfoPelicula>> getAllPeliculas() {
         try {
-            List<Pelicula> peliculas = new ArrayList<Pelicula>();
-
-            if (title == null)
-                peliculaRepository.findAll().forEach(peliculas::add);
-            else
-                peliculaRepository.findByTitleContainingIgnoreCase(title).forEach(peliculas::add);
-            if (peliculas.isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
-
-            return new ResponseEntity<>(peliculas, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    @GetMapping("/peliculas/novedades")
-    public ResponseEntity<List<Pelicula>> getAllPeliculasNew() {
-        try {
-            List<Pelicula> peliculas = new ArrayList<Pelicula>();
-
-            // Obtener la fecha actual
-            LocalDate fechaActual = LocalDate.now();
-
-            // Obtener el año
-            int anio = fechaActual.getYear();
-
-            peliculaRepository.findByYearFilm(anio).forEach(peliculas::add);
+            List<InfoPelicula> peliculas = new ArrayList<InfoPelicula>();
+            peliculas = peliculaService.getAllPeliculas();
 
             if (peliculas.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -71,27 +70,53 @@ public class PeliculaController {
 
             return new ResponseEntity<>(peliculas, HttpStatus.OK);
         } catch (Exception e) {
+
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @GetMapping("/peliculas/{id}")
-    public ResponseEntity<List<Pelicula>> getPeliculasById(@PathVariable String id) {
-        try {
-            List<Pelicula> peliculas = new ArrayList<Pelicula>();
+    // @GetMapping("/peliculas/novedades")
+    // public ResponseEntity<List<Pelicula>> getAllPeliculasNew() {
+    // try {
+    // List<Pelicula> peliculas = new ArrayList<Pelicula>();
 
-            peliculaRepository.findById(Integer.parseInt(id)).forEach(peliculas::add);
+    // // Obtener la fecha actual
+    // LocalDate fechaActual = LocalDate.now();
 
-            if (peliculas.size() == 0) {
+    // // Obtener el año
+    // int anio = fechaActual.getYear();
 
-                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "La pelicula no existe");
-            }
+    // peliculaRepository.findByYearFilm(anio).forEach(peliculas::add);
 
-            return new ResponseEntity<>(peliculas, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+    // if (peliculas.isEmpty()) {
+    // return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    // }
+
+    // return new ResponseEntity<>(peliculas, HttpStatus.OK);
+    // } catch (Exception e) {
+    // return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+    // }
+    // }
+
+    // @GetMapping("/peliculas/{id}")
+    // public ResponseEntity<List<Pelicula>> getPeliculasById(@PathVariable String
+    // id) {
+    // try {
+    // List<Pelicula> peliculas = new ArrayList<Pelicula>();
+
+    // peliculaRepository.findById(Integer.parseInt(id)).forEach(peliculas::add);
+
+    // if (peliculas.size() == 0) {
+
+    // throw new ResponseStatusException(HttpStatus.NOT_FOUND, "La pelicula no
+    // existe");
+    // }
+
+    // return new ResponseEntity<>(peliculas, HttpStatus.OK);
+    // } catch (Exception e) {
+    // return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+    // }
+    // }
 
     // @GetMapping("/peliculas/{id}")
     // public ResponseEntity<Pelicula> getPeliculaById(@PathVariable("id") long id)

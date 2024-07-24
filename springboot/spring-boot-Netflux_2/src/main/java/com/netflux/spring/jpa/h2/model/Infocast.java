@@ -34,6 +34,10 @@ public class Infocast {
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Pelicula> peliculas;
 
+    @JoinTable(name = "series_infocast", joinColumns = @JoinColumn(name = "infocast_id", nullable = false), inverseJoinColumns = @JoinColumn(name = "series_id", nullable = false))
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<Serie> series;
+
     // @OneToMany(cascade = CascadeType.ALL)
     // @JoinColumn(name = "destacado_id")
 

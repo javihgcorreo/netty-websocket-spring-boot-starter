@@ -22,7 +22,9 @@ public interface SerieRepository extends JpaRepository<Serie, Long> {
     // List<Serie> findById(long id);
 
     List<Serie> findByTitleContainingIgnoreCase(String title);
+
     List<Serie> findByYearendIsNull();
+
     List<Serie> findById(Integer id);
 
     // String texto = "Lo que devuelvo";

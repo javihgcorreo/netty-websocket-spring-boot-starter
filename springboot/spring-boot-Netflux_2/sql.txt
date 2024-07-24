@@ -45,20 +45,18 @@ CREATE TABLE series(ID BIGINT PRIMARY KEY,
  description VARCHAR(255),
  yearstart BIGINT,
  yearEnd BIGINT,
- seasons BIGINT,
- creators VARCHAR(255),
- cast_series VARCHAR(255));
+ seasons BIGINT);
 
  -- Inserción de una serie popular
-INSERT INTO series (id, url, img_url, title, description, yearstart, yearEnd, seasons, creators, cast_series)
-VALUES (1, 'https://www.example.com/series/stranger-things', 'https://www.example.com/images/stranger-things.jpg', 'Stranger Things', 'Un grupo de niños enfrenta fenómenos sobrenaturales en los años 80.', 2016, 0, 4, 'Hermanos Duffer', 'Millie Bobby Brown, Finn Wolfhard, Winona Ryder');
+INSERT INTO series (id, url, img_url, title, description, yearstart, yearEnd, seasons)
+VALUES (1, 'https://www.example.com/series/stranger-things', 'https://www.example.com/images/stranger-things.jpg', 'Stranger Things', 'Un grupo de niños enfrenta fenómenos sobrenaturales en los años 80.', 2016, 0, 4);
 -- Inserción de otra serie exitosa
-INSERT INTO series (id, url, img_url, title, description, yearstart, yearEnd, seasons, creators, cast_series)
-VALUES (2, 'https://www.example.com/series/breaking-bad', 'https://www.example.com/images/breaking-bad.jpg', 'Breaking Bad', 'Un profesor de química se convierte en fabricante de metanfetaminas.', 2008, 2013, 5, 'Vince Gilligan', 'Bryan Cranston, Aaron Paul, Anna Gunn');
+INSERT INTO series (id, url, img_url, title, description, yearstart, yearEnd, seasons)
+VALUES (2, 'https://www.example.com/series/breaking-bad', 'https://www.example.com/images/breaking-bad.jpg', 'Breaking Bad', 'Un profesor de química se convierte en fabricante de metanfetaminas.', 2008, 2013, 5);
 -- Puedes continuar con más inserciones según sea necesario
 
 
-
+-- No se usa
 CREATE TABLE InfoDestacados (
     id BIGINT PRIMARY KEY,
     tytype_destacadope VARCHAR(255) NOT NULL,
@@ -171,3 +169,59 @@ foreign key (fk_peliculas_id) references peliculas(id)
  CREATE TABLE seriesDestacadas(fk_series_id BIGINT PRIMARY KEY,
 foreign key (fk_series_id) references series(id)
 );
+
+--series destacadas
+insert into SERIESDESTACADAS values (1);
+insert into SERIESDESTACADAS values (2);
+
+ CREATE TABLE series_infocast(
+series_id BIGINT NOT NULL,
+infocast_id BIGINT NOT NULL,
+PRIMARY KEY (series_id, infocast_id),
+foreign key (series_id) references series(id),
+foreign key (infocast_id) references infocast(id)
+);
+
+
+INSERT INTO series_infocast (series_id, infocast_id)
+VALUES
+  (1, 15),
+  (1, 16),
+  (1, 17),
+  (2, 22),
+  (2, 10),
+  (2, 28);
+
+  CREATE TABLE creators (
+    id BIGINT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL
+  );
+
+  INSERT INTO creators (id, name) VALUES
+  (1, 'Akira Toriyama'),
+  (2, 'Eiichiro Oda'),
+  (3, 'Hayao Miyazaki'),
+  (4, 'Takeshi Koshiba'),
+  (5, 'Atsushi Okubo'),
+  (6, 'Kōhei Horikoshi'),
+  (7, 'Hiroyuki Nishimori'),
+  (8, 'Wit Studio'),
+  (9, 'Mappa'),
+  (10, 'Ufotable'),
+  (11, 'the Duffer Brothers),
+   (12, 'Vince Gilligan');
+
+   CREATE TABLE series_creators(
+series_id BIGINT NOT NULL,
+creators_id BIGINT NOT NULL,
+PRIMARY KEY (series_id, creators_id),
+foreign key (series_id) references series(id),
+foreign key (creators_id) references creators(id)
+);
+
+INSERT INTO series_creators (series_id, creators_id)
+VALUES
+  (1, 11),
+  (2, 12);
+
+

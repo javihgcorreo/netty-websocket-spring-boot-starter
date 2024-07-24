@@ -1,22 +1,17 @@
 package com.netflux.spring.jpa.h2.model;
 
+//import org.hibernate.mapping.List;
 import java.util.List;
 
 //import org.hibernate.mapping.List;
 
-import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+//import com.netflux.spring.jpa.h2.model.PeliculasDestacadas;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+import jakarta.persistence.*;
+
 @Entity
-@Table(name = "series")
-public class Serie {
+@Table(name = "peliculas")
+public class Pelicula {
     /*
      * @Id
      * 
@@ -40,39 +35,44 @@ public class Serie {
     @Column(name = "description", length = 255, nullable = false)
     private String description;
 
-    @Column(name = "yearstart", nullable = false)
-    private Integer yearstart;
+    @Column(name = "year_film", nullable = false)
+    private Integer yearFilm;
 
-    @Column(name = "yearend", nullable = false)
-    private Integer yearend;
+    @Column(name = "duration", nullable = false)
+    private Integer duration;
 
-    @Column(name = "seasons", nullable = false)
-    private Integer seasons;
+    @Column(name = "director", length = 255, nullable = false)
+    private String director;
 
-    // @OneToMany(cascade = CascadeType.ALL)
-    // @JoinColumn(name = "serie_id")
-
-    @ManyToMany(mappedBy = "series")
+    @ManyToMany(mappedBy = "peliculas")
     private List<Infocast> infocasts;
 
-    @ManyToMany(mappedBy = "series")
-    private List<Creator> creators;
+    @OneToOne(mappedBy = "peliculas", cascade = CascadeType.ALL)
+    private PeliculasDestacadas peliculasDestacadas;
 
-    @OneToOne(mappedBy = "series", cascade = CascadeType.ALL)
-    private SerieDestacada seriesDestacadas;
+    // @OneToOne
+    // @JoinColumn(name = "fk_peliculas_id")
+    // private PeliculasDestacadas peliculasDestacadas;
+
+    // @OneToMany(cascade = CascadeType.ALL)
+    // @JoinColumn(name = "pelicula_id")
 
     // private List<InfoCast> cast;
 
-    public Serie(String url, String imgURL, String title, String description,
-            Integer yearstart, Integer yearend, Integer seasons, String creators, List<Infocast> infocasts) {
+    public Pelicula() {
+
+    }
+
+    public Pelicula(String url, String imgURL, String title, String description,
+            Integer yearFilm, Integer duration, String director, List<Infocast> infocasts) {
         // this.id = id;
         this.url = url;
         this.imgURL = imgURL;
         this.title = title;
         this.description = description;
-        this.yearstart = yearstart;
-        this.yearend = yearend;
-        this.seasons = seasons;
+        this.yearFilm = yearFilm;
+        this.duration = duration;
+        this.director = director;
         this.infocasts = infocasts;
     }
 
@@ -112,50 +112,47 @@ public class Serie {
         this.description = description;
     }
 
-    public Integer getYearStart() {
-        return yearstart;
+    public Integer getYearFilm() {
+        return yearFilm;
     }
 
-    public void setYearStart(Integer yearstart) {
-        this.yearstart = yearstart;
+    public void setYearFilm(Integer yearFilm) {
+        this.yearFilm = yearFilm;
     }
 
-    public Integer getYearEnd() {
-        return yearend;
+    public List<Infocast> getInfocast() {
+        return this.infocasts;
     }
 
-    public void setYearEnd(Integer yearend) {
-        this.yearend = yearend;
+    public void setInfocast(List<Infocast> infocasts) {
+        this.infocasts = infocasts;
     }
 
-    public Integer getSeasons() {
-        return seasons;
-    }
-
-    public void setSeasons(Integer seasons) {
-        this.seasons = seasons;
-    }
+    // public PeliculasDestacadas getPeliculasDestacadas() {
+    // PeliculasDestacadas peliD = new PeliculasDestacadas();
+    // return peliD/* this.peliculasDestacadas */;
+    // }
 
     @Override
     public String toString() {
-        return "Serie{" +
+        return "Pelicula{" +
                 "id='" + id + '\'' +
                 ", url='" + url + '\'' +
                 ", imgURL='" + imgURL + '\'' +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
-                ", yearStart=" + yearstart +
-                ", yearEnd=" + yearend +
-                ", seasons=" + seasons +
-                // ", cast=" + cast +
+                ", year_film=" + yearFilm +
+                ", duration=" + duration +
+                ", director='" + director + '\'' +
+                ", cast1=" + infocasts +
                 '}';
-    }
+    }// este metodo no lo realiza muestro otro que no es este
 
     // @Override
     // public String toString() {
 
-    // return "Serie [id=" + id + ", url=" + url + ", description=" + description
-    // + ", year=" + year_film
+    // return "Pelicula [id=" + id + ", url=" + url + ", description=" + description
+    // + ", year=" + yearFilm
     // + ", duration=" + duration + ", director=" + director + "]";
 
     // }
