@@ -5,9 +5,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import com.netflux.spring.jpa.h2.repository.PeliculaRepository;
+import com.netflux.spring.jpa.h2.repository.PeliculaDestacadaRepository;
+import com.netflux.spring.jpa.h2.repository.PeliculaNovedosaRepository;
+
 import com.netflux.spring.jpa.h2.model.Infocast;
 import com.netflux.spring.jpa.h2.model.Pelicula;
 import com.netflux.spring.jpa.h2.model.PeliculaDestacada;
+import com.netflux.spring.jpa.h2.model.PeliculaNovedosa;
+
 import com.netflux.spring.jpa.h2.model.Serie;
 import com.netflux.spring.jpa.h2.model.SerieDestacada;
 import com.netflux.spring.jpa.h2.dto.InfoDestacados;
@@ -28,6 +33,8 @@ public class PeliculaService {
 
     @Autowired
     private PeliculaRepository peliculaRepository;
+    @Autowired
+    private PeliculaNovedosaRepository peliculaNovedosaRepository;
 
     // public PeliculaService(PeliculaRepository peliculaRepository) {
     // this.peliculaRepository = peliculaRepository;
@@ -63,13 +70,21 @@ public class PeliculaService {
     // }
 
     public List<InfoAbreviada> getAllPeliculasNovedosas() {
-        List<Pelicula> peliculas = peliculaRepository.findAll();
-        if (peliculas == null) {
-            return Collections.unmodifiableList(Collections.emptyList());
-        }
 
-        // Mapear Peliculas a InfoDestacados
-        List<InfoAbreviada> infoDestacadosObjects = peliculas.stream()
+        // Peliculas
+        // Novedades-----------------------------------------------------------------
+        List<PeliculaNovedosa> peliculasNovedosas = peliculaNovedosaRepository.findAll();
+        List<Long> peliculasNovedosasIds = peliculasNovedosas.stream()
+                .map(PeliculaNovedosa::getId)
+                .collect(Collectors.toList());
+        System.out.println("peliculaService getAllPeliculasNovedosas " + peliculasNovedosas);
+
+        List<Pelicula> peliculasNovedosasFiltradas = peliculaRepository.findAll().stream()
+                .filter(pelicula -> peliculasNovedosasIds.contains(pelicula.getId()))
+                .collect(Collectors.toList());
+
+        // Mapear Peliculas a InfoAbreviada
+        List<InfoAbreviada> infoAbreviadasObjects = peliculasNovedosasFiltradas.stream()
                 .map(pelicula -> {
                     InfoAbreviada infoAbreviada = new InfoAbreviada();
                     infoAbreviada.setId(Long.toString(pelicula.getId()));
@@ -81,8 +96,9 @@ public class PeliculaService {
                     return infoAbreviada;
                 })
                 .collect(Collectors.toList());
+        System.out.println("peliculaService getAllPeliculasNovedosasSalir " + infoAbreviadasObjects);
 
-        return infoDestacadosObjects;
+        return infoAbreviadasObjects;
     }
 
     public List<InfoAbreviada> getAllPeliculas() {
@@ -104,6 +120,11 @@ public class PeliculaService {
                     return infoAbreviada;
                 })
                 .collect(Collectors.toList());
+
+        // Check if infoDestacadosObjects is null
+        if (infoDestacadosObjects == null) {
+            return Collections.unmodifiableList(Collections.emptyList());
+        }
 
         return infoDestacadosObjects;
     }

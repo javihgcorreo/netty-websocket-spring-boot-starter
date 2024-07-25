@@ -74,15 +74,15 @@ public class Infocast {
     // return <List> Infocast actores;
     // }
 
-    @Override
-    public String toString() {
-        return "Infocast{" +
-                "id='" + id + '\'' +
-                ", title='" + name + '\'' +
-                ", imgURL='" + imgURL + '\'' +
-                ", peliculas=" + peliculas +
-                '}';
-    }
+    // @Override
+    // public String toString() {
+    // return "Infocast{" +
+    // "id='" + id + '\'' +
+    // ", title='" + name + '\'' +
+    // ", imgURL='" + imgURL + '\'' +
+    // ", peliculas=" + peliculas +
+    // '}';
+    // }
 
     // @Override
     // public String toString() {

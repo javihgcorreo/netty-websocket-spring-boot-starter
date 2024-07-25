@@ -17,22 +17,24 @@ import lombok.Builder;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Entity
-@Table(name = "peliculasdestacadas")
 @Getter
 @Setter
-public class PeliculaDestacada {
+@Entity
+@Table(name = "peliculasnovedades")
+public class PeliculaNovedosa {
 
     @Id
     @Column(name = "fk_peliculas_id")
-
     private Long fk_peliculas_id;
 
-    // no se porque aquí si funcion poniendolo y en PeliculaNovedosa me toca
-    // comentarlo.
     @OneToOne
     @JoinColumn(name = "fk_peliculas_id")
     private Pelicula peliculas;
+
+    // no se porque aquí si no funciona y en Pelicula si está puesto.
+    // @OneToOne
+    // @JoinColumn(name = "fk_peliculas_id")
+    // private Pelicula peliculas;
 
     public Long getId() {
         return fk_peliculas_id;

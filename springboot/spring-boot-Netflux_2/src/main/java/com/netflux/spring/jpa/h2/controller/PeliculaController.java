@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.http.ResponseEntity;
 
 import com.netflux.spring.jpa.h2.model.Pelicula;
 import com.netflux.spring.jpa.h2.repository.PeliculaRepository;
@@ -32,8 +33,8 @@ import com.netflux.spring.jpa.h2.dto.InfoAbreviada;
 @RequestMapping("/api")
 public class PeliculaController {
 
-    @Autowired
-    PeliculaRepository peliculaRepository;
+    // @Autowired
+    // PeliculaRepository peliculaRepository;
 
     @Autowired
     PeliculaService peliculaService;
@@ -59,15 +60,15 @@ public class PeliculaController {
     // }
     // }
 
-    @GetMapping("/peliculas")
-    public ResponseEntity<List<InfoAbreviada>> getAllPeliculas() {
+    @GetMapping("/peliculas/novedades")
+    public ResponseEntity<List<InfoAbreviada>> getAllPeliculasNovedosas() {
         try {
             List<InfoAbreviada> peliculas = new ArrayList<InfoAbreviada>();
-            peliculas = peliculaService.getAllPeliculas();
+            peliculas = peliculaService.getAllPeliculasNovedosas();
 
-            if (peliculas.isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
+            // if (peliculas.isEmpty()) {
+            // return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            // }
 
             return new ResponseEntity<>(peliculas, HttpStatus.OK);
         } catch (Exception e) {
@@ -76,15 +77,15 @@ public class PeliculaController {
         }
     }
 
-    @GetMapping("/peliculas/novedades")
-    public ResponseEntity<List<InfoAbreviada>> getAllPeliculasNovedosas() {
+    @GetMapping("/peliculas")
+    public ResponseEntity<List<InfoAbreviada>> getAllPeliculas() {
         try {
             List<InfoAbreviada> peliculas = new ArrayList<InfoAbreviada>();
             peliculas = peliculaService.getAllPeliculas();
 
-            if (peliculas.isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
+            // if (peliculas.isEmpty()) {
+            // return new ResponseEntity<>(HttpStatus.OK);
+            // }
 
             return new ResponseEntity<>(peliculas, HttpStatus.OK);
         } catch (Exception e) {

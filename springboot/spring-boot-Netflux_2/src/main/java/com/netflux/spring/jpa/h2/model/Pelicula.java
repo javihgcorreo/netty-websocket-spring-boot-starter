@@ -53,8 +53,16 @@ public class Pelicula {
     @ManyToMany(mappedBy = "peliculas")
     private List<Infocast> infocasts;
 
-    @OneToOne(mappedBy = "peliculas", cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_peliculasdestacas_id")
     private PeliculaDestacada peliculasDestacadas;
+
+    // @OneToOne(mappedBy = "peliculas", cascade = CascadeType.ALL)
+    // private PeliculaDestacada peliculasDestacadas;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_peliculasnovedosas_id")
+    private PeliculaNovedosa peliculasNovedades;
 
     // @OneToOne
     // @JoinColumn(name = "fk_peliculas_id")
@@ -149,20 +157,5 @@ public class Pelicula {
     public void setInfocast(List<Infocast> infocasts) {
         this.infocasts = infocasts;
     }
-
-    // @Override
-    // public String toString() {
-    // return "Pelicula{" +
-    // "id='" + id + '\'' +
-    // ", url='" + url + '\'' +
-    // ", imgURL='" + imgURL + '\'' +
-    // ", title='" + title + '\'' +
-    // ", description='" + description + '\'' +
-    // ", year_film=" + yearFilm +
-    // ", duration=" + duration +
-    // ", director='" + director + '\'' +
-    // ", cast1=" + infocasts +
-    // '}';
-    // }// este metodo no lo realiza muestro otro que no es este
 
 }

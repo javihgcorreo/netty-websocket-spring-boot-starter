@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.netflux.spring.jpa.h2.model.Pelicula;
+import com.netflux.spring.jpa.h2.model.PeliculaDestacada;
 
 @Repository
 public interface PeliculaRepository extends JpaRepository<Pelicula, Long> {
@@ -21,6 +22,8 @@ public interface PeliculaRepository extends JpaRepository<Pelicula, Long> {
     List<Pelicula> findAll();
 
     // String getPeliculasHola();
+
+    // List<Pelicula> findByPeliculasDestacadas(List<Long> peliculasDestacadasIds);
 
     // List<Pelicula> findById(long id);
 

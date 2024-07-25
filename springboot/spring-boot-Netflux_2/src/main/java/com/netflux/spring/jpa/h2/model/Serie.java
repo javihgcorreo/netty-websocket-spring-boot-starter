@@ -58,7 +58,8 @@ public class Serie {
     @ManyToMany(mappedBy = "series")
     private List<Creator> creators;
 
-    @OneToOne(mappedBy = "series", cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_series_id")
     private SerieDestacada seriesDestacadas;
 
     // private List<InfoCast> cast;

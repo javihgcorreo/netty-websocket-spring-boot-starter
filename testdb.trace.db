@@ -535,3 +535,7 @@ Syntax error in SQL statement "insert into PELICULASNOVEDADES (FK_PELICULAS_ID )
 insert into PELICULASNOVEDADES (FK_PELICULAS_ID ) 
  values
  (FK_PELICULAS_ID 1),(2),(6),(7),(8) [42001-214]
+2024-07-25 19:22:47 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "drop table [*]if exist PELICULASNOVEDADES"; se esperaba "identifier"
+Syntax error in SQL statement "drop table [*]if exist PELICULASNOVEDADES"; expected "identifier"; SQL statement:
+drop table if exist PELICULASNOVEDADES [42001-214]
