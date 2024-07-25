@@ -20,6 +20,7 @@ public class InfoDestacados {
     private String imgURL;
 
     // Constructor
+
     // public InfoDestacados(String id, String type, String url, String title,
     // String imgURL) {
     // this.id = id;
@@ -30,4 +31,5 @@ public class InfoDestacados {
     // }
 
     // Getters y Setters
+
 }

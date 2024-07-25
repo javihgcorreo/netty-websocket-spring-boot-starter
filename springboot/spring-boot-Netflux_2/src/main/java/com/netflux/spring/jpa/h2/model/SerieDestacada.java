@@ -6,7 +6,15 @@ package com.netflux.spring.jpa.h2.model;
 //import org.hibernate.mapping.List;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Setter
+@Getter
 @Entity
 @Table(name = "seriesdestacadas")
 public class SerieDestacada {
@@ -22,24 +30,8 @@ public class SerieDestacada {
     @JoinColumn(name = "fk_series_id")
     private Serie series;
 
-    // @OneToOne(mappedBy = "id")
-    // private Serie serie;
-
-    public void SeriesDestacadas() {
-
-    }
-
-    public void SeriesDestacadas(Long fk_series_id) {
-        this.fk_series_id = fk_series_id;
-
-    }
-
-    public long getFkSerieId() {
+    public Long getId() {
         return fk_series_id;
-    }
-
-    public void setFkSerieId(long fk_series_id) {
-        this.fk_series_id = fk_series_id;
     }
 
 }

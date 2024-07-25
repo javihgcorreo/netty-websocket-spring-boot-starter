@@ -1,20 +1,32 @@
 package com.netflux.spring.jpa.h2.model;
 
+//import org.hibernate.mapping.List;
+//import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.annotation.Generated;
 
-@Getter
-@Setter
+//import org.hibernate.mapping.List;
+
+import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "creators")
 public class Creator {
+    /*
+     * @Id
+     * 
+     * @Column(name = "id")
+     * private String id;
+     */
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,15 +39,26 @@ public class Creator {
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Serie> series;
 
+    // @OneToMany(cascade = CascadeType.ALL)
+    // @JoinColumn(name = "destacado_id")
+
+    // private List<Infocast> cast;
+
     public Creator(String name) {
         // this.id = id;
         this.name = name;
     }
 
-    public Creator(String name, List<Serie> series) {
-        // this.id = id;
+    public long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
         this.name = name;
-        this.series = series;
     }
 
 }

@@ -7,6 +7,8 @@ package com.netflux.spring.jpa.h2.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,6 +19,8 @@ import lombok.Builder;
 @Builder
 @Entity
 @Table(name = "peliculasdestacadas")
+@Getter
+@Setter
 public class PeliculaDestacada {
 
     @Id
@@ -27,5 +31,9 @@ public class PeliculaDestacada {
     @OneToOne
     @JoinColumn(name = "fk_peliculas_id")
     private Pelicula peliculas;
+
+    public Long getId() {
+        return fk_peliculas_id;
+    }
 
 }

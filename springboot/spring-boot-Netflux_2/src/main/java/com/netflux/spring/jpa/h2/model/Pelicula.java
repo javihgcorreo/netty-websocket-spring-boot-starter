@@ -150,19 +150,19 @@ public class Pelicula {
         this.infocasts = infocasts;
     }
 
-    @Override
-    public String toString() {
-        return "Pelicula{" +
-                "id='" + id + '\'' +
-                ", url='" + url + '\'' +
-                ", imgURL='" + imgURL + '\'' +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", year_film=" + yearFilm +
-                ", duration=" + duration +
-                ", director='" + director + '\'' +
-                ", cast1=" + infocasts +
-                '}';
-    }// este metodo no lo realiza muestro otro que no es este
+    // @Override
+    // public String toString() {
+    // return "Pelicula{" +
+    // "id='" + id + '\'' +
+    // ", url='" + url + '\'' +
+    // ", imgURL='" + imgURL + '\'' +
+    // ", title='" + title + '\'' +
+    // ", description='" + description + '\'' +
+    // ", year_film=" + yearFilm +
+    // ", duration=" + duration +
+    // ", director='" + director + '\'' +
+    // ", cast1=" + infocasts +
+    // '}';
+    // }// este metodo no lo realiza muestro otro que no es este
 
 }

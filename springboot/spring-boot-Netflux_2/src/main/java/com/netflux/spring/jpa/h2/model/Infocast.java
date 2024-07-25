@@ -38,11 +38,6 @@ public class Infocast {
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Serie> series;
 
-    // @OneToMany(cascade = CascadeType.ALL)
-    // @JoinColumn(name = "destacado_id")
-
-    // private List<Infocast> cast;
-
     public Infocast() {
 
     }

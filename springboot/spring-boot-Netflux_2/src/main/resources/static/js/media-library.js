@@ -11,7 +11,7 @@ class MediaLibrary {
     }
   
     async loadMovies() {
-      const response = await fetch(`${this.baseUrl}/peliculas`);
+      const response = await fetch(`${this.baseUrl}/peliculas/novedades`);
       const movies = await response.json();
       return movies;
     }
@@ -63,7 +63,7 @@ class MediaLibrary {
         divDetalles.innerHTML = divDetalles.innerHTML+`
           <div class="col-lg-3 col-md-6 col-sm-6">
               <div class="thumbnail">
-                  <img src="${pelicula.imgUrl}" alt="Pel&iacute;cula ${pelicula.title}">
+                  <img src="${pelicula.imgUrl}" alt="Pel&iacute;cula ${pelicula.title}" onerror="mostrarCuadroTamaño(this)">
                   <div class="caption">
                       <h3><a href="segunda_pagina.html?id=${pelicula.id}">${pelicula.title}</a></h3>
                   </div>
@@ -92,7 +92,7 @@ class MediaLibrary {
         divDetalles.innerHTML = divDetalles.innerHTML+`
           <div class="col-lg-3 col-md-6 col-sm-6">
               <div class="thumbnail">
-                  <img src="${serie.imgUrl}" alt="Pel&iacute;cula ${serie.title}">
+                  <img src="${serie.imgUrl}" alt="Pel&iacute;cula ${serie.title}"  onerror="mostrarCuadroTamaño(this)">
                   <div class="caption">
                       <h3><a href="segunda_pagina.html">${serie.title}</a></h3>
                   </div>
@@ -124,7 +124,7 @@ class MediaLibrary {
           <li class="list-group-item">
               <div class="row">
                   <div class="col-2">
-                      <img src="${destacado.imgUrl}" alt="${destacado.title}">
+                      <img src="${destacado.imgUrl}" alt="${destacado.title}" onerror="mostrarCuadroTamaño(this)">
                   </div>
                   <div class="col-lg-10">
                       <h6>${destacado.title}</h6>
@@ -148,7 +148,7 @@ class MediaLibrary {
           <li class="list-group-item">
               <div class="row">
                   <div class="col-2">
-                      <img src="${trailer.imgUrl}" alt="${trailer.title}">
+                      <img src="${trailer.imgUrl}" alt="${trailer.title}" onerror="mostrarCuadroTamaño(this)">
                   </div>
                   <div class="col-lg-10">
                       <h6>${trailer.title}</h6>
@@ -161,3 +161,27 @@ class MediaLibrary {
       divDetalles.innerHTML = divDetalles.innerHTML+`</ul><!--end ul lista trailer-->
       `;
    }
+
+   function mostrarCuadroTamaño(img) {
+    // Obtener el padre del elemento img
+    const parent = img.parentNode;
+
+    // Crear un nuevo elemento div para el cuadro
+    const cuadro = document.createElement('div');
+    cuadro.classList.add('alert', 'alert-warning'); // Utilizamos clases de Bootstrap
+
+    // Crear un icono (opcional)
+    const icono = document.createElement('i');
+    icono.classList.add('bi-exclamation-triangle-fill'); // Icono de Bootstrap
+
+    // Crear un elemento p para mostrar el tamaño
+    const tamaño = document.createElement('p');
+    tamaño.textContent = `Tamaño esperado: ${img.naturalWidth}x${img.naturalHeight} px`;
+
+    // Agregar el icono y el tamaño al cuadro
+    cuadro.appendChild(icono);
+    cuadro.appendChild(tamaño);
+
+    // Reemplazar la imagen con el cuadro
+    parent.replaceChild(cuadro, img);
+}

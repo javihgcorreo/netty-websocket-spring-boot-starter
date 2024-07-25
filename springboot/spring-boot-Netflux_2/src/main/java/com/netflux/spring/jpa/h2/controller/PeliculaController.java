@@ -25,6 +25,7 @@ import com.netflux.spring.jpa.h2.model.Pelicula;
 import com.netflux.spring.jpa.h2.repository.PeliculaRepository;
 import com.netflux.spring.jpa.h2.service.PeliculaService;
 import com.netflux.spring.jpa.h2.dto.InfoPelicula;
+import com.netflux.spring.jpa.h2.dto.InfoAbreviada;
 
 @CrossOrigin(origins = "http://localhost:8081")
 @RestController
@@ -59,9 +60,9 @@ public class PeliculaController {
     // }
 
     @GetMapping("/peliculas")
-    public ResponseEntity<List<InfoPelicula>> getAllPeliculas() {
+    public ResponseEntity<List<InfoAbreviada>> getAllPeliculas() {
         try {
-            List<InfoPelicula> peliculas = new ArrayList<InfoPelicula>();
+            List<InfoAbreviada> peliculas = new ArrayList<InfoAbreviada>();
             peliculas = peliculaService.getAllPeliculas();
 
             if (peliculas.isEmpty()) {
@@ -74,6 +75,40 @@ public class PeliculaController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping("/peliculas/novedades")
+    public ResponseEntity<List<InfoAbreviada>> getAllPeliculasNovedosas() {
+        try {
+            List<InfoAbreviada> peliculas = new ArrayList<InfoAbreviada>();
+            peliculas = peliculaService.getAllPeliculas();
+
+            if (peliculas.isEmpty()) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+
+            return new ResponseEntity<>(peliculas, HttpStatus.OK);
+        } catch (Exception e) {
+
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    // @GetMapping("/peliculas")
+    // public ResponseEntity<List<InfoPelicula>> getAllPeliculas() {
+    // try {
+    // List<InfoPelicula> peliculas = new ArrayList<InfoPelicula>();
+    // peliculas = peliculaService.getAllPeliculas();
+
+    // if (peliculas.isEmpty()) {
+    // return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    // }
+
+    // return new ResponseEntity<>(peliculas, HttpStatus.OK);
+    // } catch (Exception e) {
+
+    // return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+    // }
+    // }
 
     // @GetMapping("/peliculas/novedades")
     // public ResponseEntity<List<Pelicula>> getAllPeliculasNew() {

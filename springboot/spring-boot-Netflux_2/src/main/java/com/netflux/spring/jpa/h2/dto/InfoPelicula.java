@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-import com.netflux.spring.jpa.h2.model.Infocast;
-import com.netflux.spring.jpa.h2.model.Pelicula;
-
 public class InfoPelicula {
     private String id;
     private String url;
@@ -35,20 +32,4 @@ public class InfoPelicula {
 
     // Getters y Setters
 
-    public static InfoPelicula mapPeliculaToInfoPelicula(Pelicula pelicula) {
-        Collection<String> cast = pelicula.getInfocasts().stream()
-                .map(Infocast::getName) // Mapear a lista de nombres
-                .collect(Collectors.toList()); // Coleccionar en una lista
-
-        return new InfoPelicula(
-                String.valueOf(pelicula.getId()), // Convertir id a String
-                pelicula.getUrl(),
-                pelicula.getImgUrl(),
-                pelicula.getTitle(),
-                pelicula.getDescription(),
-                pelicula.getYearFilm(),
-                pelicula.getDuration(),
-                pelicula.getDirector(),
-                cast);
-    }
 }

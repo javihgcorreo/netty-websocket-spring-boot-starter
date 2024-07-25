@@ -7,6 +7,12 @@ import org.springframework.stereotype.Service;
 import com.netflux.spring.jpa.h2.repository.PeliculaRepository;
 import com.netflux.spring.jpa.h2.model.Infocast;
 import com.netflux.spring.jpa.h2.model.Pelicula;
+import com.netflux.spring.jpa.h2.model.PeliculaDestacada;
+import com.netflux.spring.jpa.h2.model.Serie;
+import com.netflux.spring.jpa.h2.model.SerieDestacada;
+import com.netflux.spring.jpa.h2.dto.InfoDestacados;
+import com.netflux.spring.jpa.h2.dto.InfoAbreviada;
+
 import com.netflux.spring.jpa.h2.dto.InfoPelicula;
 import com.netflux.spring.jpa.h2.service.PeliculaService;
 
@@ -56,15 +62,50 @@ public class PeliculaService {
 
     // }
 
-    public List<InfoPelicula> getAllPeliculas() {
+    public List<InfoAbreviada> getAllPeliculasNovedosas() {
         List<Pelicula> peliculas = peliculaRepository.findAll();
         if (peliculas == null) {
             return Collections.unmodifiableList(Collections.emptyList());
         }
 
-        return peliculas.stream()
-                .map(InfoPelicula::mapPeliculaToInfoPelicula)
+        // Mapear Peliculas a InfoDestacados
+        List<InfoAbreviada> infoDestacadosObjects = peliculas.stream()
+                .map(pelicula -> {
+                    InfoAbreviada infoAbreviada = new InfoAbreviada();
+                    infoAbreviada.setId(Long.toString(pelicula.getId()));
+                    infoAbreviada.setUrl(pelicula.getUrl());
+                    infoAbreviada.setTitle(pelicula.getTitle());
+                    infoAbreviada.setImgURL(pelicula.getImgUrl());
+
+                    // ... mapear otros campos
+                    return infoAbreviada;
+                })
                 .collect(Collectors.toList());
+
+        return infoDestacadosObjects;
+    }
+
+    public List<InfoAbreviada> getAllPeliculas() {
+        List<Pelicula> peliculas = peliculaRepository.findAll();
+        if (peliculas == null) {
+            return Collections.unmodifiableList(Collections.emptyList());
+        }
+
+        // Mapear Peliculas a InfoDestacados
+        List<InfoAbreviada> infoDestacadosObjects = peliculas.stream()
+                .map(pelicula -> {
+                    InfoAbreviada infoAbreviada = new InfoAbreviada();
+                    infoAbreviada.setId(Long.toString(pelicula.getId()));
+                    infoAbreviada.setUrl(pelicula.getUrl());
+                    infoAbreviada.setTitle(pelicula.getTitle());
+                    infoAbreviada.setImgURL(pelicula.getImgUrl());
+
+                    // ... mapear otros campos
+                    return infoAbreviada;
+                })
+                .collect(Collectors.toList());
+
+        return infoDestacadosObjects;
     }
 
     public Pelicula getPeliculaById(Long id) {

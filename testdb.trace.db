@@ -529,3 +529,9 @@ Caused by: org.h2.mvstore.MVStoreException: The file is locked: C:/vscode/testdb
 	at org.h2.mvstore.FileStore.open(FileStore.java:128)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:452)
 	... 59 more
+2024-07-25 14:59:32 jdbc[23]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "insert into PELICULASNOVEDADES (FK_PELICULAS_ID ) \000d\000a values\000d\000a (FK_PELICULAS_ID [*]1),(2),(6),(7),(8)"; se esperaba "(, ., [, ::, AT, FORMAT, *, /, %, +, -, ||, NOT, IS, ILIKE, REGEXP, AND, OR, ,, )"
+Syntax error in SQL statement "insert into PELICULASNOVEDADES (FK_PELICULAS_ID ) \000d\000a values\000d\000a (FK_PELICULAS_ID [*]1),(2),(6),(7),(8)"; expected "(, ., [, ::, AT, FORMAT, *, /, %, +, -, ||, NOT, IS, ILIKE, REGEXP, AND, OR, ,, )"; SQL statement:
+insert into PELICULASNOVEDADES (FK_PELICULAS_ID ) 
+ values
+ (FK_PELICULAS_ID 1),(2),(6),(7),(8) [42001-214]

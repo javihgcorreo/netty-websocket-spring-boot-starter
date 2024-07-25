@@ -225,3 +225,18 @@ VALUES
   (2, 12);
 
 
+CREATE TABLE peliculasNovedades(fk_peliculas_id BIGINT PRIMARY KEY,
+foreign key (fk_peliculas_id) references peliculas(id)
+);
+
+CREATE TABLE seriesNovedades(fk_series_id BIGINT PRIMARY KEY,
+foreign key (fk_series_id) references series(id)
+);
+
+insert into PELICULASNOVEDADES (FK_PELICULAS_ID ) 
+ values
+ (1),(2),(6),(7),(8);
+
+insert into SERIESNOVEDADES (FK_SERIES_ID ) 
+ values
+ (1),(2);
